@@ -24,7 +24,7 @@ curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 
 echo "-- Install packages --"
 sudo apt-get install -y --force-yes apache2 mysql-server-5.6 git-core nodejs rabbitmq-server redis-server
-sudo apt-get install -y --force-yes php7.0-common php7.0-dev php7.0-json php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0 php7.0-mysql php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-bcmath php7.0-zip
+sudo apt-get install -y --force-yes php7.0-common php7.0-dev php7.0-json php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0 php7.0-mysql php7.0-fpm php7.0-curl php-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-mbstring php7.0-bcmath php7.0-zip
 Update
 
 echo "-- Configure PHP &Apache --"

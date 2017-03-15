@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+v#!/usr/bin/env bash
 
 Update () {
     echo "-- Update packages --"
@@ -15,6 +15,7 @@ echo "-- Install tools and helpers --"
 sudo apt-get install -y --force-yes python-software-properties vim htop curl git npm
 
 echo "-- Install PPA's --"
+sudo add-apt-repository ppa:ondrej/apache2
 sudo add-apt-repository ppa:ondrej/php
 sudo add-apt-repository ppa:chris-lea/redis-server
 Update
@@ -24,10 +25,10 @@ curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 
 echo "-- Install packages --"
 sudo apt-get install -y --force-yes apache2 mysql-server-5.6 git-core nodejs rabbitmq-server redis-server
-sudo apt-get install -y --force-yes php7.0-common php7.0-dev php7.0-json php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0 php7.0-mysql php7.0-fpm php7.0-curl php-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-mbstring php7.0-bcmath php7.0-zip
+sudo apt-get install -y --force-yes libapache2-mod-php7.0 php7.0 php7.0-dev php7.0-opcache php7.0-mysql php7.0-fpm php7.0-curl php-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-mbstring php7.0-bcmath php7.0-zip
 Update
 
-echo "-- Configure PHP &Apache --"
+echo "-- Configure PHP & Apache --"
 sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/apache2/php.ini
 sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.0/apache2/php.ini
 sudo a2enmod rewrite

@@ -4,7 +4,7 @@
 
 ## Что внутри?
 
-- ubuntu/trusty64
+- ubuntu/trusty32
 - Git, Vim, Curl, Nano и др.
 - Apache2
 - PHP7 с некоторыми дополнениями
@@ -21,9 +21,9 @@
 - Выполнить 'vagrant up'
 - Изменить файл hosts (/etc/hosts), добавив:
 ````
-192.168.100.100 app.dev
-192.168.100.100 phpmyadmin.dev
+192.168.1.150 dev.local
+192.168.1.150 dev-db.local
 ````
-- Открыть в браузере 'http://app.dev/' или 'http://phpmyadmin.dev/' (Пользователь и пароль - 'root')
+- Открыть в браузере 'http://dev.local/' или 'http://dev-db.local/' (Пользователь и пароль - 'root')
 
 

@@ -1,29 +1,32 @@
 # Vagrant Lamp Dev 
 
-Простой Vagrant LAMP сервер с PHP7.
+Simple Vagrant LAMP server.
 
-## Что внутри?
+## What is inside?
 
 - ubuntu/trusty32
 - Git, Vim, Curl, Nano и др.
 - Apache2
-- PHP7 с некоторыми дополнениями
-- MySQL 5.6
-- Node.js c NPM
+- PHP7 with some extensions
+- MySQL
+- Node.js and NPM
 - RabbitMQ
 - Redis
 - Composer
 - phpMyAdmin
 
-## Как использовать
+## How to use
 
-- Клонировать этот репозиторий в свой проект
-- Выполнить 'vagrant up'
-- Изменить файл hosts (/etc/hosts), добавив:
+- Clone this repository in your project
+- Run 'vagrant up' in terminal
+- Edit hosts file (/etc/hosts), adding:
+
 ````
-192.168.1.150 dev.local
-192.168.1.150 dev-db.local
+192.168.1.150 dev.local // local ip from router
+192.168.1.150 dev-db.local // local ip from router
 ````
-- Открыть в браузере 'http://dev.local/' или 'http://dev-db.local/' (Пользователь и пароль - 'root')
+
+- Open in browser 'http://dev.local/' or 'http://dev-db.local/'
+- By default mysql database pass and user - 'root'
 
 

@@ -22,8 +22,8 @@ Simple Vagrant LAMP server.
 - Edit hosts file (/etc/hosts), adding:
 
 ````
-192.168.1.150 dev.local // local ip from router
-192.168.1.150 dev-db.local // local ip from router
+192.168.0.150 dev.local // local ip from router
+192.168.0.150 dev-db.local // local ip from router
 ````
 
 - Open in browser 'http://dev.local/' or 'http://dev-db.local/'

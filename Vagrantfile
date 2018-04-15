@@ -9,12 +9,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Mount shared folder using NFS
     config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "www-data", mount_options: ["dmode=775","fmode=775"]
-        #id: "core",
-        #:nfs => true,
-        #:mount_options => ['nolock,vers=3,noatime']
+       #id: "core",
+       #:nfs => true,
+       #:mount_options => ['nolock,vers=3,udp,noatime']
 
     # Do some network configuration
-    config.vm.network "public_network", ip: "192.168.1.150"
+    config.vm.network "public_network", ip: "192.168.0.150"
     config.vm.define  "dev" do |dev|
     end
 
@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
         if host =~ /darwin/
             cpus = `sysctl -n hw.ncpu`.to_i
-            mem = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 4
+            mem = `sysctl -n hw.memsize`.to_i / 1024 / 1024 / 2
 
         elsif host =~ /linux/
             cpus = `nproc`.to_i
@@ -33,8 +33,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
         # Windows...
         else
-            cpus = 4
-            mem = 1024
+            cpus = 2
+            mem = 2048
         end
 
         vb.customize ["modifyvm", :id, "--memory", mem]

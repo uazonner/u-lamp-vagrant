@@ -10,5 +10,7 @@
 $TmpFile = tempnam(sys_get_temp_dir(), 'TestFileForCheckTmp');
 echo $TmpFile;
 
+echo '<br>';
+
 // PHP Information
 phpinfo();

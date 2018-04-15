@@ -37,7 +37,7 @@ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 
 echo "-- Install packages --"
 sudo apt-get install -y --force-yes apache2 mariadb-server git-core nodejs
-sudo apt-get install -y --force-yes php7.0 php7.0-common libapache2-mod-php7.0 php7.0-cli php7.0-dev php7.0-opcache php7.0-mysql php7.0-pdo php7.0-memcached php7.0-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-mbstring php7.0-bcmath
+sudo apt-get install -y --force-yes php7.0 php7.0-common libapache2-mod-php7.0 php7.0-cli php7.0-dev php7.0-opcache php7.0-mysql php7.0-pdo php7.0-memcached php7.0-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-zip php7.0-mbstring php7.0-bcmath
 sudo apt-get install -y --force-yes libmagickwand-dev imagemagick
 sudo pecl install imagick
 sudo apt-get install -y --force-yes php7.0-imagick

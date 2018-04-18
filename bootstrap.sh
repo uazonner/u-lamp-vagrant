@@ -37,15 +37,19 @@ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 
 echo "-- Install packages --"
 sudo apt-get install -y --force-yes apache2 mariadb-server git-core nodejs
-sudo apt-get install -y --force-yes php7.0 php7.0-common libapache2-mod-php7.0 php7.0-cli php7.0-dev php7.0-opcache php7.0-mysql php7.0-pdo php7.0-memcached php7.0-xdebug php7.0-ssh2 php7.0-imap php7.0-soap php7.0-gd php7.0-mcrypt php7.0-intl php7.0-xml php7.0-zip php7.0-mbstring php7.0-bcmath
+sudo apt-get install -y --force-yes php7.1 php7.1-common libapache2-mod-php7.1 php7.1-cli php7.1-dev php7.1-curl php7.1-opcache php7.1-mysql php7.1-pdo php7.1-memcached php7.1-xdebug php7.1-ssh2 php7.1-imap php7.1-soap php7.1-gd php7.1-mcrypt php7.1-intl php7.1-xml php7.1-zip php7.1-mbstring php7.1-bcmath
 sudo apt-get install -y --force-yes libmagickwand-dev imagemagick
 sudo pecl install imagick
-sudo apt-get install -y --force-yes php7.0-imagick
+sudo apt-get install -y --force-yes php7.1-imagick
 Update
 
 echo "-- Configure PHP & Apache --"
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/apache2/php.ini
-sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.0/apache2/php.ini
+sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.1/apache2/php.ini
+sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/apache2/php.ini
+sed -i "s/upload_max_filesize = .*/upload_max_filesize = 256M/" /etc/php/7.1/apache2/php.ini
+sed -i "s/memory_limit = .*/memory_limit = 256M/" /etc/php/7.1/apache2/php.ini
+sed -i "s/post_max_size = .*/post_max_size = 256M/" /etc/php/7.1/apache2/php.ini
+
 sudo a2enmod rewrite
 
 echo "-- Creating virtual hosts --"
@@ -82,6 +86,11 @@ wget -k https://files.phpmyadmin.net/phpMyAdmin/4.8.0/phpMyAdmin-4.8.0-all-langu
 sudo tar -xzvf phpMyAdmin-4.8.0-all-languages.tar.gz -C /var/www/
 sudo rm phpMyAdmin-4.8.0-all-languages.tar.gz
 sudo mv /var/www/phpMyAdmin-4.8.0-all-languages/ /var/www/phpmyadmin
+
+sudo cp /var/www/app/config.inc.php /var/www/phpmyadmin/config.inc.php
+sudo mkdir /var/www/phpmyadmin/tmp && chmod 777 /var/www/phpmyadmin/tmp
+echo "-- Restart Apache --"
+sudo /etc/init.d/apache2 restart
 
 echo "-- Setup databases --"
 mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '$DBUSER'@'%' IDENTIFIED BY '$DBPASSWD' WITH GRANT OPTION; FLUSH PRIVILEGES;"

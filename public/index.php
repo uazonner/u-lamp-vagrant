@@ -8,7 +8,7 @@
 // Create a temp file in the temporary
 // files directory using sys_get_temp_dir()
 $TmpFile = tempnam(sys_get_temp_dir(), 'TestFileForCheckTmp');
-echo $TmpFile;
+echo '<strong>Test tmp folder:</strong> ' . $TmpFile;
 
 echo '<br>';
 

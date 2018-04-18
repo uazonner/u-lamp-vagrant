@@ -5,7 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-    config.vm.box = "ubuntu/trusty32"
+    config.vm.box = "ubuntu/trusty64"
+    config.vm.box_check_update = false
 
     # Mount shared folder using NFS
     config.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "www-data", mount_options: ["dmode=775","fmode=775"]
@@ -21,6 +22,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Assign a quarter of host memory and all available CPU's to VM
     # Depending on host OS this has to be done differently.
     config.vm.provider :virtualbox do |vb|
+
+        vb.gui = false
+
         host = RbConfig::CONFIG['host_os']
 
         if host =~ /darwin/
@@ -29,12 +33,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
         elsif host =~ /linux/
             cpus = `nproc`.to_i
-            mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 2048 / 2
+            mem = `grep 'MemTotal' /proc/meminfo | sed -e 's/MemTotal://' -e 's/ kB//'`.to_i / 4096 / 4
 
         # Windows...
         else
-            cpus = 2
-            mem = 2048
+            cpus = 4
+            mem = 4096
         end
 
         vb.customize ["modifyvm", :id, "--memory", mem]

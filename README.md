@@ -8,7 +8,7 @@ Simple Vagrant LAMP server.
 - Git, Vim, Curl, Nano и др.
 - Apache2
 - PHP7 with some extensions
-- MySQL
+- MariaDb
 - Node.js and NPM
 - Composer
 - phpMyAdmin

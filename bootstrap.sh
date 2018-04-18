@@ -35,9 +35,10 @@ Update
 echo "-- Install NodeJS --"
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 
-echo "-- Install packages --"
+echo "-- Install packages and php extensions --"
 sudo apt-get install -y --force-yes apache2 mariadb-server git-core nodejs
 sudo apt-get install -y --force-yes php7.1 php7.1-common libapache2-mod-php7.1 php7.1-cli php7.1-dev php7.1-curl php7.1-opcache php7.1-mysql php7.1-pdo php7.1-memcached php7.1-xdebug php7.1-ssh2 php7.1-imap php7.1-soap php7.1-gd php7.1-mcrypt php7.1-intl php7.1-xml php7.1-zip php7.1-mbstring php7.1-bcmath
+sudo apt-get install -y --force-yes php-uploadprogress
 sudo apt-get install -y --force-yes libmagickwand-dev imagemagick
 sudo pecl install imagick
 sudo apt-get install -y --force-yes php7.1-imagick
@@ -70,8 +71,17 @@ cat << EOF | sudo tee -a /etc/apache2/sites-available/default.conf
     ServerName phpmyadmin.dev.local
     ServerAlias www.phpmyadmin.dev.local
 </VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot /var/www/app
+</VirtualHost>
 EOF
+
+sudo a2dissite 000-default.conf
 sudo a2ensite default.conf
+
+echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf
+sudo a2enconf fqdn
 
 echo "-- Restart Apache --"
 sudo /etc/init.d/apache2 restart
@@ -87,11 +97,17 @@ sudo tar -xzvf phpMyAdmin-4.8.0-all-languages.tar.gz -C /var/www/
 sudo rm phpMyAdmin-4.8.0-all-languages.tar.gz
 sudo mv /var/www/phpMyAdmin-4.8.0-all-languages/ /var/www/phpmyadmin
 
-sudo cp /var/www/app/config.inc.php /var/www/phpmyadmin/config.inc.php
+echo "-- Config phpMyAdmin --"
+sudo cp /var/www/app/phpmyadmin/config.inc.php /var/www/phpmyadmin/config.inc.php
 sudo mkdir /var/www/phpmyadmin/tmp && chmod 777 /var/www/phpmyadmin/tmp
+sudo rm -R /var/www/app/phpmyadmin
+
 echo "-- Restart Apache --"
 sudo /etc/init.d/apache2 restart
 
 echo "-- Setup databases --"
 mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '$DBUSER'@'%' IDENTIFIED BY '$DBPASSWD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 mysql -uroot -proot -e "CREATE DATABASE $DBNAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
+echo "   ...done."
+echo "Virtual machine installed and configured"
+echo "All components success installed, edit your /etc/hosts and browse to http://dev.local"

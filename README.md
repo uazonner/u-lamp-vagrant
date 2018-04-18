@@ -4,7 +4,7 @@ Simple Vagrant LAMP server.
 
 ## What is inside?
 
-- ubuntu/trusty32
+- ubuntu/trusty64
 - Git, Vim, Curl, Nano и др.
 - Apache2
 - PHP7 with some extensions

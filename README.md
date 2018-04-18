@@ -10,8 +10,6 @@ Simple Vagrant LAMP server.
 - PHP7 with some extensions
 - MySQL
 - Node.js and NPM
-- RabbitMQ
-- Redis
 - Composer
 - phpMyAdmin
 
@@ -23,10 +21,10 @@ Simple Vagrant LAMP server.
 
 ````
 192.168.0.150 dev.local // local ip from router
-192.168.0.150 dev-db.local // local ip from router
+192.168.0.150 phpmyadmin.dev.local // local ip from router
 ````
 
-- Open in browser 'http://dev.local/' or 'http://dev-db.local/'
+- Open in browser 'http://dev.local/' or 'http://phpmyadmin.dev.local/'
 - By default mysql database pass and user - 'root'
 
 

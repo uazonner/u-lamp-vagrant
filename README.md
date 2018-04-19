@@ -7,11 +7,18 @@ Simple Vagrant LAMP server.
 - ubuntu/trusty64
 - Git, Vim, Curl, Nano и др.
 - Apache2
-- PHP7 with some extensions
+- PHP 7.1
+-- PHP loaded extensions: date, libxml, openssl, pcre, zlib, filter, hash, Reflection, SPL, session, standard, apache2handler, mysqlnd, PDO, xml, bcmath, calendar, ctype, curl, dom, mbstring, fileinfo, ftp, gd, gettext, iconv, igbinary, imagick, imap, intl, json, exif, mcrypt, msgpack, mysqli, pdo_mysql, Phar, posix, readline, shmop, SimpleXML, soap, sockets, ssh2, sysvmsg, sysvsem, sysvshm, tokenizer, uploadprogress, wddx, xmlreader, xmlwriter, xsl, zip, memcached, Zend OPcache, xdebug.
+-- PHP config: memory_limit =	256M, post_max_size =	256M, upload_max_filesize = 256M, display_errors = On, error_reporting = E_ALL
 - MariaDb
 - Node.js and NPM
 - Composer
 - phpMyAdmin
+
+## Dependencies
+
+- Oracle VM VirtualBox
+- Vagrant
 
 ## How to use
 

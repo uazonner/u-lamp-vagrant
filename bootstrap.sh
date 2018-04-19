@@ -1,11 +1,12 @@
 #! /usr/bin/env bash
 v#!/usr/bin/env bash
 
-# Variables
+# Variables may be change for your project
 DBHOST=localhost
 DBNAME=dev
 DBUSER=root
 DBPASSWD=root
+SERVERHOST=dev.local
 
 Update () {
     echo "-- Update packages --"
@@ -62,14 +63,14 @@ cat << EOF | sudo tee -a /etc/apache2/sites-available/default.conf
 
 <VirtualHost *:80>
     DocumentRoot /var/www/app
-    ServerName dev.local
-    ServerAlias www.dev.local
+    ServerName $SERVERHOST
+    ServerAlias www.$SERVERHOST
 </VirtualHost>
 
 <VirtualHost *:80>
     DocumentRoot /var/www/phpmyadmin
-    ServerName phpmyadmin.dev.local
-    ServerAlias www.phpmyadmin.dev.local
+    ServerName phpmyadmin.$SERVERHOST
+    ServerAlias www.phpmyadmin.$SERVERHOST
 </VirtualHost>
 
 <VirtualHost *:80>
@@ -92,10 +93,10 @@ sudo mv composer.phar /usr/local/bin/composer
 sudo chmod +x /usr/local/bin/composer
 
 echo "-- Install phpMyAdmin --"
-wget -k https://files.phpmyadmin.net/phpMyAdmin/4.8.0/phpMyAdmin-4.8.0-all-languages.tar.gz
-sudo tar -xzvf phpMyAdmin-4.8.0-all-languages.tar.gz -C /var/www/
-sudo rm phpMyAdmin-4.8.0-all-languages.tar.gz
-sudo mv /var/www/phpMyAdmin-4.8.0-all-languages/ /var/www/phpmyadmin
+wget -k https://files.phpmyadmin.net/phpMyAdmin/4.8.0.1/phpMyAdmin-4.8.0.1-all-languages.tar.gz
+sudo tar -xzvf phpMyAdmin-4.8.0.1-all-languages.tar.gz -C /var/www/
+sudo rm phpMyAdmin-4.8.0.1-all-languages.tar.gz
+sudo mv /var/www/phpMyAdmin-4.8.0.1-all-languages/ /var/www/phpmyadmin
 
 echo "-- Config phpMyAdmin --"
 sudo cp /var/www/app/phpmyadmin/config.inc.php /var/www/phpmyadmin/config.inc.php
@@ -105,9 +106,11 @@ sudo rm -R /var/www/app/phpmyadmin
 echo "-- Restart Apache --"
 sudo /etc/init.d/apache2 restart
 
+sudo sed -i "s%http://dev.local%http://$SERVERHOST/%g" /var/www/app/index.php
+
 echo "-- Setup databases --"
 mysql -uroot -proot -e "GRANT ALL PRIVILEGES ON *.* TO '$DBUSER'@'%' IDENTIFIED BY '$DBPASSWD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
 mysql -uroot -proot -e "CREATE DATABASE $DBNAME CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci";
 echo "   ...done."
 echo "Virtual machine installed and configured"
-echo "All components success installed, edit your /etc/hosts and browse to http://dev.local"
+echo "All components success installed, edit your /etc/hosts and browse to http://$SERVERHOST"

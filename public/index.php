@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Telega</title>
+    <title>U-Virtual machine</title>
 </head>
 <body>
-    <h1 style="text-align: center">Telega virtual machine verify configuration file on
+    <h1 style="text-align: center">Virtual machine verify configuration file on
         <a href="http://<?= $_SERVER['SERVER_ADDR']; ?>"><?= $_SERVER['SERVER_ADDR']; ?></a>
         or
         <a href="http://dev.local">http://dev.local</a>

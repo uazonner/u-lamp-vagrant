@@ -1,4 +1,4 @@
-# Vagrant Lamp Dev 
+# U Lamp Vagrant 
 
 Simple Vagrant LAMP server.
 

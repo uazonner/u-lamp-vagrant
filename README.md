@@ -20,7 +20,7 @@ Simple Vagrant LAMP server for development and testing.
 ## Dependencies
 
 - <a href="https://www.virtualbox.org/wiki/Downloads">Oracle VM VirtualBox</a>
-- <a href="https://www.vagrantup.com/">Vagrant</a>
+- <a href="https://www.vagrantup.com/">Vagrant</a> with vagrant-vbguest plugin (vagrant plugin install vagrant-vbguest)
 
 ## How to use
 
